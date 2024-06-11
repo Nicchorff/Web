@@ -1,0 +1,450 @@
+﻿@using DoacaoSangueMVC.Entities;
+@model Hemocentro
+
+@{
+    ViewBag.Title = "'NOME DO HEMOCENTRO' - Agendamento";
+}
+<style>
+    .wizard {
+    margin: 20px auto;
+    background: #fff;
+}
+
+    .wizard .nav-tabs {
+        position: relative;
+        margin: 40px auto;
+        margin-bottom: 0;
+        border-bottom-color: #e0e0e0;
+    }
+
+    .wizard > div.wizard-inner {
+        position: relative;
+    }
+
+.connecting-line {
+    height: 2px;
+    background: #e0e0e0;
+    position: absolute;
+    width: 80%;
+    margin: 0 auto;
+    left: 0;
+    right: 0;
+    top: 50%;
+    z-index: 1;
+}
+
+.wizard .nav-tabs > li.active > a, .wizard .nav-tabs > li.active > a:hover, .wizard .nav-tabs > li.active > a:focus {
+    color: #555555;
+    cursor: default;
+    border: 0;
+    border-bottom-color: transparent;
+}
+
+span.round-tab {
+    width: 70px;
+    height: 70px;
+    line-height: 70px;
+    display: inline-block;
+    border-radius: 100px;
+    background: #fff;
+    border: 2px solid #e0e0e0;
+    z-index: 2;
+    position: absolute;
+    left: 0;
+    text-align: center;
+    font-size: 25px;
+}
+
+    span.round-tab i {
+        color: #555555;
+    }
+
+.wizard li.active span.round-tab {
+    background: #fff;
+    border: 2px solid #5bc0de;
+}
+
+    .wizard li.active span.round-tab i {
+        color: #5bc0de;
+    }
+
+span.round-tab:hover {
+    color: #333;
+    border: 2px solid #333;
+}
+
+.wizard .nav-tabs > li {
+    width: 25%;
+}
+
+.wizard li:after {
+    content: " ";
+    position: absolute;
+    left: 46%;
+    opacity: 0;
+    margin: 0 auto;
+    bottom: 0px;
+    border: 5px solid transparent;
+    border-bottom-color: #5bc0de;
+    transition: 0.1s ease-in-out;
+}
+
+.wizard li.active:after {
+    content: " ";
+    position: absolute;
+    left: 46%;
+    opacity: 1;
+    margin: 0 auto;
+    bottom: 0px;
+    border: 10px solid transparent;
+    border-bottom-color: #5bc0de;
+}
+
+.wizard .nav-tabs > li a {
+    width: 70px;
+    height: 70px;
+    margin: 20px auto;
+    border-radius: 100%;
+    padding: 0;
+}
+
+    .wizard .nav-tabs > li a:hover {
+        background: transparent;
+    }
+
+.wizard .tab-pane {
+    position: relative;
+    padding-top: 50px;
+}
+
+.wizard h3 {
+    margin-top: 0;
+}
+
+.bs-calltoaction {
+    position: relative;
+    width: auto;
+    padding: 15px 25px;
+    border: 1px solid black;
+    margin-top: 10px;
+    margin-bottom: 10px;
+    border-radius: 5px;
+}
+
+    .bs-calltoaction > .row {
+        display: table;
+        width: calc(100% + 30px);
+    }
+
+        .bs-calltoaction > .row > [class^="col-"],
+        .bs-calltoaction > .row > [class*=" col-"] {
+            float: none;
+            display: table-cell;
+            vertical-align: middle;
+        }
+
+.cta-contents {
+    padding-top: 10px;
+    padding-bottom: 10px;
+}
+
+.cta-title {
+    margin: 0 auto 15px;
+    padding: 0;
+}
+
+.cta-desc {
+    padding: 0;
+}
+
+    .cta-desc p:last-child {
+        margin-bottom: 0;
+    }
+
+.cta-button {
+    padding-top: 10px;
+    padding-bottom: 10px;
+}
+
+.bs-calltoaction.bs-calltoaction-default {
+    color: #333;
+    background-color: #fff;
+    border-color: #ccc;
+}
+
+.bs-calltoaction.bs-calltoaction-primary {
+    color: #fff;
+    background-color: #337ab7;
+    border-color: #2e6da4;
+}
+
+.bs-calltoaction.bs-calltoaction-info {
+    color: #fff;
+    background-color: #5bc0de;
+    border-color: #46b8da;
+}
+
+.bs-calltoaction.bs-calltoaction-success {
+    color: #fff;
+    background-color: #5cb85c;
+    border-color: #4cae4c;
+}
+
+.bs-calltoaction.bs-calltoaction-warning {
+    color: #fff;
+    background-color: #f0ad4e;
+    border-color: #eea236;
+}
+
+.bs-calltoaction.bs-calltoaction-danger {
+    color: #fff;
+    background-color: #d9534f;
+    border-color: #d43f3a;
+}
+
+    .bs-calltoaction.bs-calltoaction-primary .cta-button .btn,
+    .bs-calltoaction.bs-calltoaction-info .cta-button .btn,
+    .bs-calltoaction.bs-calltoaction-success .cta-button .btn,
+    .bs-calltoaction.bs-calltoaction-warning .cta-button .btn,
+    .bs-calltoaction.bs-calltoaction-danger .cta-button .btn {
+        border-color: #fff;
+    }
+
+blockquote {
+    border-left: none
+}
+
+.quote-badge {
+    background-color: rgba(0, 0, 0, 0.2);
+}
+
+.quote-box {
+    overflow: hidden;
+    margin-top: -50px;
+    padding-top: -100px;
+    border-radius: 17px;
+    background-color: #4ADFCC;
+    margin-top: 25px;
+    color: white;
+    width: 325px;
+    box-shadow: 2px 2px 2px 2px #E0E0E0;
+}
+
+.quotation-mark {
+    margin-top: -10px;
+    font-weight: bold;
+    font-size: 100px;
+    color: white;
+    font-family: "Times New Roman", Georgia, Serif;
+}
+
+.quote-text {
+    font-size: 19px;
+    margin-top: -65px;
+}
+
+</style>
+<header>
+    <link rel='stylesheet' href='https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css'>
+</header>
+<main class="cd__main" style="margin-bottom: -40%;">
+    <!-- Start DEMO HTML (Use the following code into your project)-->
+    <div class="container">
+        <div class="row">
+            <section>
+                <div class="wizard">
+                    <div class="wizard-inner">
+                        <div class="connecting-line"></div>
+                        <ul class="nav nav-tabs" role="tablist">
+
+                            <li role="presentation" class="active">
+                                <a href="#step1" data-toggle="tab" aria-controls="step1" role="tab" title="1 etapa">
+                                    <span class="round-tab">
+                                        <i class="glyphicon glyphicon-folder-open"></i>
+                                    </span>
+                                </a>
+                            </li>
+
+                            <li role="presentation" class="disabled">
+                                <a href="#step2" data-toggle="tab" aria-controls="step2" role="tab" title="2 etapa">
+                                    <span class="round-tab">
+                                        <i class="glyphicon glyphicon-pencil"></i>
+                                    </span>
+                                </a>
+                            </li>
+                            <li role="presentation" class="disabled">
+                                <a href="#step3" data-toggle="tab" aria-controls="step3" role="tab" title="3 etapa">
+                                    <span class="round-tab">
+                                        <i class="glyphicon glyphicon-picture"></i>
+                                    </span>
+                                </a>
+                            </li>
+
+                            <li role="presentation" class="disabled">
+                                <a href="#complete" data-toggle="tab" aria-controls="complete" role="tab" title="Confirmar">
+                                    <span class="round-tab">
+                                        <i class="glyphicon glyphicon-ok"></i>
+                                    </span>
+                                </a>
+                            </li>
+                        </ul>
+                    </div>
+
+                    <form role="form">
+                        <div class="tab-content">
+                            <div class="tab-pane active" role="tabpanel" id="step1">
+                                <h3>Primeiro passo</h3>
+                                <div class="bs-calltoaction bs-calltoaction-primary">
+                                    <div class="row">
+                                        <div class="col-md-9 cta-contents">
+                                            <h1 class="cta-title">Selecione a data</h1>
+                                            <select id="horario" style="color: black; padding: 10px;
+                                                font-size: 16px;
+                                                border-radius: 5px;
+                                                width: 200px;" onchange="mostrarHorario()">
+                                                <option value="09:00">09:00</option>
+                                                <option value="10:00">10:00</option>
+                                                <option value="11:00">11:00</option>
+                                                <option value="12:00">12:00</option>
+                                                <option value="13:00">13:00</option>
+                                                <option value="14:00">14:00</option>
+                                                <option value="15:00">15:00</option>
+                                                <option value="16:00">16:00</option>
+                                                <option value="17:00">17:00</option>
+                                                <option value="18:00">18:00</option>
+                                                <option value="19:00">19:00</option>
+                                                <option value="20:00">20:00</option>
+                                            </select>
+                                            <p id="resultado"></p>
+                                            <div class="container" style="margin-left: 20%;">
+                                                <div id="calendar-container">
+                                                    <div id="calendar" style="width: 35%;
+                                                    background-color:white;
+                                                    margin: 0 auto;">
+                                                    </div>
+                                                    <div id="selected-date" style="margin-top: 20px; margin-left: 40%;">
+                                                        Data do agendamento: <span id="date-value">Nenhuma</span>
+                                                    </div>
+                                                </div>
+                                            </div>
+
+                                        </div>
+                                    </div>
+                                </div>
+                                <ul class="list-inline pull-right">
+                                    <li><button type="button" onclick="" class="btn btn-primary next-step">Save and continue</button></li>
+                                </ul>
+                            </div>
+                            <div class="tab-pane" role="tabpanel" id="step2">
+                                <h3>Segundo passo</h3>
+                                <div class="bs-calltoaction bs-calltoaction-info">
+                                    <div class="row">
+                                        <div class="col-md-9 cta-contents">
+                                            <h1 class="cta-title" style="top: 0;">Selecione o hemocentro</h1>
+                                            <select id="hemocentros" style="color: black; padding: 10px;
+                                                font-size: 16px;
+                                                border-radius: 5px;
+                                                width: 300px;">
+                                                <!--FOR EM HEMOCENTRO-->
+                                                <option value="">HEMOCENTRO1</option>
+                                                <option value="">HEMOCENTRO2</option>
+                                                <option value="">HEMOCENTRO3</option>
+                                                <option value="">HEMOCENTRO4</option>
+                                            </select>
+                                        </div>
+                                        <div class="col-md-3 cta-button">
+                                            <img style="width: 100%;" src="https://s2.glbimg.com/h-Y17kR85vnUQLnNX9CtqGRK_-M=/0x0:1280x592/984x0/smart/filters:strip_icc()/i.s3.glbimg.com/v1/AUTH_59edd422c0c84a879bd37670ae4f538a/internal_photos/bs/2021/F/R/Xw1HoORRGB5Ibcy2Q8zQ/whatsapp-image-2021-09-02-at-08.14.45.jpeg" alt="Alternate Text" />
+                                            <h1>INFORMAÇÕES HEMOCENTRO</h1>
+                                        </div>
+                                    </div>
+                                </div>
+                                <ul class="list-inline pull-right">
+                                    <li><button type="button" class="btn btn-default prev-step">Previous</button></li>
+                                    <li><button type="button" class="btn btn-primary next-step">Save and continue</button></li>
+                                </ul>
+                            </div>
+                            <div class="tab-pane" role="tabpanel" id="step3">
+                                <h3>Step 3</h3>
+                                <div class="bs-calltoaction bs-calltoaction-success">
+                                    <div class="row">
+                                        <div class="col-md-9 cta-contents">
+                                            <h1 class="cta-title">Dados da doação</h1>
+                                            <div class="cta-desc">
+                                                <p>Digite o seu peso atual</p>
+                                                <input type="number" name="peso" value="" style="width: 100%;
+                                                    max-width: 150px;
+                                                    padding: 5px;
+                                                    margin: 10px 0;
+                                                    border: 2px solid #ccc;
+                                                    border-radius: 5px;
+                                                    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+                                                    color: black;
+                                                    font-size: 16px;
+                                                    transition: border-color 0.3s, box-shadow 0.3s;"/>
+                                            </div>
+                                        </div>
+                                        <div class="col-md-3 cta-button">
+                                            <a href="#" class="btn btn-lg btn-block btn-success">Go for It!</a>
+                                        </div>
+                                    </div>
+                                </div>
+                                <ul class="list-inline pull-right">
+                                    <li><button type="button" class="btn btn-default prev-step">Previous</button></li>
+                                    <li><button type="button" class="btn btn-default next-step">Skip</button></li>
+                                    <li><button type="button" class="btn btn-primary btn-info-full next-step">Save and continue</button></li>
+                                </ul>
+                            </div>
+                            <div class="tab-pane" role="tabpanel" id="complete">
+                                <h3>Complete</h3>
+                                <div class="bs-calltoaction bs-calltoaction-success">
+                                    <div class="row">
+                                        <div class="col-md-9 cta-contents">
+                                            <h1 class="cta-title">Confirmar dados</h1>
+                                            <div class="cta-desc">
+                                                <p>Data:</p>
+                                                
+                                                <p>Dados do hemocentro:</p>
+
+                                                <p>Dados da doação:</p>
+
+                                                <p>recomendações:</p>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="clearfix"></div>
+                        </div>
+                    </form>
+                </div>
+            </section>
+        </div>
+    </div>
+    <!-- END EDMO HTML (Happy Coding!)-->
+</main>
+<script src='https://code.jquery.com/jquery-2.2.4.min.js'></script>
+<script src='https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/js/bootstrap.min.js'></script>
+<!-- Script JS -->
+<script src="~/js/site.js"></script>
+
+
+<!--calendario script-->
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/fullcalendar/5.11.0/main.min.js"></script>
+<script>
+    $(document).ready(function () {
+        var calendarEl = document.getElementById('calendar');
+        var calendar = new FullCalendar.Calendar(calendarEl, {
+            initialView: 'dayGridMonth',
+            dateClick: function (info) {
+                $('#date-value').text(info.dateStr);
+            }
+        });
+        calendar.render();
+    });
+    function mostrarHorario() {
+        var select = document.getElementById("horario");
+        var horarioSelecionado = select.options[select.selectedIndex].text;
+        document.getElementById("resultado").innerHTML = "Horário selecionado: " + horarioSelecionado;
+    }
+</script>

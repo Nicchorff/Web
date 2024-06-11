@@ -1,0 +1,275 @@
+﻿@{
+    ViewData["Title"] = "Privacy Policy";
+}
+<h1>@ViewData["Title"]</h1>
+
+<style>
+    a.navbar-brand {
+        white-space: normal;
+        text-align: center;
+        word-break: break-all;
+    }
+
+    a {
+        color: #0077cc;
+    }
+
+    .btn-primary {
+        color: #fff;
+        background-color: #1b6ec2;
+        border-color: #1861ac;
+    }
+
+    .nav-pills .nav-link.active, .nav-pills .show > .nav-link {
+        color: #fff;
+        background-color: #1b6ec2;
+        border-color: #1861ac;
+    }
+
+    .border-top {
+        border-top: 1px solid #e5e5e5;
+    }
+
+    .border-bottom {
+        border-bottom: 1px solid #e5e5e5;
+    }
+
+    .box-shadow {
+        box-shadow: 0 .25rem .75rem rgba(0, 0, 0, .05);
+    }
+
+    button.accept-policy {
+        font-size: 1rem;
+        line-height: inherit;
+    }
+
+    .footer {
+        position: absolute;
+        bottom: 0;
+        width: 100%;
+        white-space: nowrap;
+        line-height: 60px;
+    }
+
+    /* Responsividade para cada prontuário */
+    .prontuario-container {
+        margin-bottom: 20px;
+    }
+
+    .photo-container img {
+        max-width: 100%;
+        height: auto;
+    }
+
+    .prontuario-info {
+        padding: 10px;
+        background-color: #f8f9fa;
+        border: 1px solid #dee2e6;
+        border-radius: 5px;
+    }
+
+    /* Responsividade para a barra de navegação */
+    .navbar-brand {
+        white-space: normal;
+        text-align: center;
+        word-break: break-all;
+    }
+
+    /* Cor do link */
+    a {
+        color: #0077cc;
+    }
+
+    /* Botão primário */
+    .btn-primary {
+        color: #fff;
+        background-color: #1b6ec2;
+        border-color: #1861ac;
+    }
+
+    /* Estilo para links ativos */
+    .nav-pills .nav-link.active, .nav-pills .show > .nav-link {
+        color: #fff;
+        background-color: #1b6ec2;
+        border-color: #1861ac;
+    }
+
+    /* Borda superior */
+    .border-top {
+        border-top: 1px solid #e5e5e5;
+    }
+
+    /* Borda inferior */
+    .border-bottom {
+        border-bottom: 1px solid #e5e5e5;
+    }
+
+    /* Sombra da caixa */
+    .box-shadow {
+        box-shadow: 0 .25rem .75rem rgba(0, 0, 0, .05);
+    }
+
+    /* Botão de aceitar política */
+    button.accept-policy {
+        font-size: 1rem;
+        line-height: inherit;
+    }
+
+    /* Estilo do rodapé */
+    .footer {
+        position: relative; /* Alterado para relativo */
+        width: 100%;
+        white-space: nowrap;
+        line-height: 60px;
+    }
+
+    /* Responsividade para cada prontuário */
+    .prontuario-container {
+        margin-bottom: 20px;
+        transition: transform 0.3s ease; /* Adicionando uma transição suave */
+    }
+
+        /* Efeito ao passar o mouse nos prontuários */
+        .prontuario-container:hover {
+            transform: scale(1.05); /* Aumenta um pouco o tamanho do prontuário */
+        }
+
+    .photo-container img {
+        max-width: 100%;
+        height: auto;
+    }
+
+    .prontuario-info {
+        padding: 10px;
+        background-color: #f8f9fa;
+        border: 1px solid #dee2e6;
+        border-radius: 5px;
+    }
+</style>
+
+<div class="container">
+    <main role="main" class="pb-3">
+        <div class="container">
+            <!-- Prontuário 1: João -->
+            <div class="prontuario-container">
+                <div class="row" style="background-color: dimgrey;">
+                    <div class="col-md-4">
+                        <!-- Espaço para a foto do paciente -->
+                        <div class="photo-container">
+                            <img src="https://th.bing.com/th/id/OIP.n5CeR93916slWXGyV13PuAHaHa?rs=1&pid=ImgDetMain" alt="Foto de João" style="max-width: 250px; border-radius: 20px;">
+                        </div>
+                    </div>
+                    <div class="col-md-8">
+                        <!-- Dados do prontuário -->
+                        <div class="prontuario-info">
+                            <h3>Prontuário de João</h3>
+                            <p><strong>Nome:</strong> João da Silva</p>
+                            <p><strong>Idade:</strong> 45 anos</p>
+                            <p><strong>Gênero:</strong> Masculino</p>
+                            <p><strong>Tipo Sanguíneo:</strong> A+</p>
+                            <p><strong>Última Doação:</strong> 01/06/2024</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <!-- Prontuário 2: Maria -->
+            <div class="prontuario-container">
+                <div class="row">
+                    <div class="col-md-4">
+                        <!-- Espaço para a foto do paciente -->
+                        <div class="photo-container">
+                            <img src="img/perfil.png" alt="Foto de Maria">
+                        </div>
+                    </div>
+                    <div class="col-md-8">
+                        <!-- Dados do prontuário -->
+                        <div class="prontuario-info">
+                            <h3>Prontuário de Maria</h3>
+                            <p><strong>Nome:</strong> Maria Oliveira</p>
+                            <p><strong>Idade:</strong> 32 anos</p>
+                            <p><strong>Gênero:</strong> Feminino</p>
+                            <p><strong>Tipo Sanguíneo:</strong> O-</p>
+                            <p><strong>Última Doação:</strong> 25/05/2024</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <!-- Prontuário 3: Carlos -->
+            <div class="prontuario-container">
+                <div class="row">
+                    <div class="col-md-4">
+                        <!-- Espaço para a foto do paciente -->
+                        <div class="photo-container">
+                            <img src="img/perfil.png" alt="Foto de Carlos">
+                        </div>
+                    </div>
+                    <div class="col-md-8">
+                        <!-- Dados do prontuário -->
+                        <div class="prontuario-info">
+                            <h3>Prontuário de Carlos</h3>
+                            <p><strong>Nome:</strong> Carlos da Silva</p>
+                            <p><strong>Idade:</strong> 38 anos</p>
+                            <p><strong>Gênero:</strong> Masculino</p>
+                            <p><strong>Tipo Sanguíneo:</strong> B-</p>
+                            <p><strong>Última Doação:</strong> 18/07/2024</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Prontuário 4: Ana -->
+            <div class="prontuario-container">
+                <div class="row">
+                    <div class="col-md-4">
+                        <!-- Espaço para a foto do paciente -->
+                        <div class="photo-container">
+                            <img src="img/perfil.png" alt="Foto de Ana">
+                        </div>
+                    </div>
+                    <div class="col-md-8">
+                        <!-- Dados do prontuário -->
+                        <div class="prontuario-info">
+                            <h3>Prontuário de Ana</h3>
+                            <p><strong>Nome:</strong> Ana Oliveira</p>
+                            <p><strong>Idade:</strong> 27 anos</p>
+                            <p><strong>Gênero:</strong> Feminino</p>
+                            <p><strong>Tipo Sanguíneo:</strong> AB+</p>
+                            <p><strong>Última Doação:</strong> 30/06/2024</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Prontuário 5: José -->
+            <div class="prontuario-container">
+                <div class="row">
+                    <div class="col-md-4">
+                        <!-- Espaço para a foto do paciente -->
+                        <div class="photo-container">
+                            <img src="img/perfil.png" alt="Foto de José">
+                        </div>
+                    </div>
+                    <div class="col-md-8">
+                        <!-- Dados do prontuário -->
+                        <div class="prontuario-info">
+                            <h3>Prontuário de José</h3>
+                            <p><strong>Nome:</strong> José da Silva</p>
+                            <p><strong>Idade:</strong> 50 anos</p>
+                            <p><strong>Gênero:</strong> Masculino</p>
+                            <p><strong>Tipo Sanguíneo:</strong> O+</p>
+                            <p><strong>Última Doação:</strong> 10/08/2024</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+        </div>
+    </main>
+
+</div>
+<script src="~/lib/jquery/dist/jquery.min.js"></script>
+<script src="~/lib/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
+<script src="~/js/site.js" asp-append-version="true"></script>
+<script src="https://cdn.jsdelivr.net/npm/fullcalendar@6.1.9/index.global.min.js"></script>
+<script src="@Html.Raw("https://cdn.jsdelivr.net/npm/@fullcalendar/bootstrap5@6.1.9/index.global.min.js")"></script>
+<script src="https://unpkg.com/bs-brain@2.0.4/components/calendars/calendar-1/assets/controller/calendar-1.js"></script>

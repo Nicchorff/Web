@@ -1,0 +1,213 @@
+﻿@using DoacaoSangueMVC.Entities;
+@model List<Hemocentro>
+@{
+    ViewBag.Title = "'NOME DO HEMOCENTRO' - Estoque de sangue";
+}
+<h2>@ViewBag.Title.</h2>
+<h3>@ViewBag.Message</h3>
+
+<div class="container py-5">
+    <div class="row">   
+        <!-- A+ -->
+        <div class="col-xl-3 col-lg-6 mb-4">
+            <div class="bg-white rounded-lg p-5 shadow">
+                <h2 class="h6 font-weight-bold text-center mb-4">A+</h2>
+                <div class="progress mx-auto" data-value='25'>
+                    <span class="progress-left">
+                        <span class="progress-bar border-danger"></span>
+                    </span>
+                    <span class="progress-right">
+                        <span class="progress-bar border-danger"></span>
+                    </span>
+                    <div class="progress-value w-100 h-100 rounded-circle d-flex align-items-center justify-content-center">
+                        <div class="h2 font-weight-bold">25<sup class="small">%</sup></div>
+                    </div>
+                </div>
+                <div class="row text-center mt-4">
+                        <div class="h4 font-weight-bold mb-0">28L</div>
+                </div>
+            </div>
+        </div>
+
+        <!-- A- -->
+        <div class="col-xl-3 col-lg-6 mb-4">
+            <div class="bg-white rounded-lg p-5 shadow">
+                <h2 class="h6 font-weight-bold text-center mb-4">A-</h2>
+                <div class="progress mx-auto" data-value='25'>
+                    <span class="progress-left">
+                        <span class="progress-bar border-danger"></span>
+                    </span>
+                    <span class="progress-right">
+                        <span class="progress-bar border-danger"></span>
+                    </span>
+                    <div class="progress-value w-100 h-100 rounded-circle d-flex align-items-center justify-content-center">
+                        <div class="h2 font-weight-bold">25<sup class="small">%</sup></div>
+                    </div>
+                </div>
+                <div class="row text-center mt-4">
+                    <div class="h4 font-weight-bold mb-0">28L</div>
+                </div>
+            </div>
+        </div>
+
+        <!-- B+ -->
+        <div class="col-xl-3 col-lg-6 mb-4">
+            <div class="bg-white rounded-lg p-5 shadow">
+                <h2 class="h6 font-weight-bold text-center mb-4">B+</h2>
+                <div class="progress mx-auto" data-value='25'>
+                    <span class="progress-left">
+                        <span class="progress-bar border-danger"></span>
+                    </span>
+                    <span class="progress-right">
+                        <span class="progress-bar border-danger"></span>
+                    </span>
+                    <div class="progress-value w-100 h-100 rounded-circle d-flex align-items-center justify-content-center">
+                        <div class="h2 font-weight-bold">25<sup class="small">%</sup></div>
+                    </div>
+                </div>
+                <div class="row text-center mt-4">
+                    <div class="h4 font-weight-bold mb-0">28L</div>
+                </div>
+            </div>
+        </div>
+
+        <!-- B- -->
+        <div class="col-xl-3 col-lg-6 mb-4">
+            <div class="bg-white rounded-lg p-5 shadow">
+                <h2 class="h6 font-weight-bold text-center mb-4">B-</h2>
+                <div class="progress mx-auto" data-value='25'>
+                    <span class="progress-left">
+                        <span class="progress-bar border-danger"></span>
+                    </span>
+                    <span class="progress-right">
+                        <span class="progress-bar border-danger"></span>
+                    </span>
+                    <div class="progress-value w-100 h-100 rounded-circle d-flex align-items-center justify-content-center">
+                        <div class="h2 font-weight-bold">25<sup class="small">%</sup></div>
+                    </div>
+                </div>
+                <div class="row text-center mt-4">
+                    <div class="h4 font-weight-bold mb-0">28L</div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+
+    <div class="row">
+        <!-- AB+ -->
+        <div class="col-xl-3 col-lg-6 mb-4">
+            <div class="bg-white rounded-lg p-5 shadow">
+                <h2 class="h6 font-weight-bold text-center mb-4">AB+</h2>
+                <div class="progress mx-auto" data-value='25'>
+                    <span class="progress-left">
+                        <span class="progress-bar border-danger"></span>
+                    </span>
+                    <span class="progress-right">
+                        <span class="progress-bar border-danger"></span>
+                    </span>
+                    <div class="progress-value w-100 h-100 rounded-circle d-flex align-items-center justify-content-center">
+                        <div class="h2 font-weight-bold">25<sup class="small">%</sup></div>
+                    </div>
+                </div>
+                <div class="row text-center mt-4">
+                    <div class="h4 font-weight-bold mb-0">28L</div>
+                </div>
+            </div>
+        </div>
+
+        <!-- AB- -->
+        <div class="col-xl-3 col-lg-6 mb-4">
+            <div class="bg-white rounded-lg p-5 shadow">
+                <h2 class="h6 font-weight-bold text-center mb-4">AB-</h2>
+                <div class="progress mx-auto" data-value='25'>
+                    <span class="progress-left">
+                        <span class="progress-bar border-danger"></span>
+                    </span>
+                    <span class="progress-right">
+                        <span class="progress-bar border-danger"></span>
+                    </span>
+                    <div class="progress-value w-100 h-100 rounded-circle d-flex align-items-center justify-content-center">
+                        <div class="h2 font-weight-bold">25<sup class="small">%</sup></div>
+                    </div>
+                </div>
+                <div class="row text-center mt-4">
+                    <div class="h4 font-weight-bold mb-0">28L</div>
+                </div>
+            </div>
+        </div>
+
+        <!-- O+ -->
+        <div class="col-xl-3 col-lg-6 mb-4">
+            <div class="bg-white rounded-lg p-5 shadow">
+                <h2 class="h6 font-weight-bold text-center mb-4">O+</h2>
+                <div class="progress mx-auto" data-value='25'>
+                    <span class="progress-left">
+                        <span class="progress-bar border-danger"></span>
+                    </span>
+                    <span class="progress-right">
+                        <span class="progress-bar border-danger"></span>
+                    </span>
+                    <div class="progress-value w-100 h-100 rounded-circle d-flex align-items-center justify-content-center">
+                        <div class="h2 font-weight-bold">25<sup class="small">%</sup></div>
+                    </div>
+                </div>
+                <div class="row text-center mt-4">
+                    <div class="h4 font-weight-bold mb-0">28L</div>
+                </div>
+            </div>
+        </div>
+
+        <!-- O- -->
+        <div class="col-xl-3 col-lg-6 mb-4">
+            <div class="bg-white rounded-lg p-5 shadow">
+                <h2 class="h6 font-weight-bold text-center mb-4">O-</h2>
+                <div class="progress mx-auto" data-value='25'>
+                    <span class="progress-left">
+                        <span class="progress-bar border-danger"></span>
+                    </span>
+                    <span class="progress-right">
+                        <span class="progress-bar border-danger"></span>
+                    </span>
+                    <div class="progress-value w-100 h-100 rounded-circle d-flex align-items-center justify-content-center">
+                        <div class="h2 font-weight-bold">25<sup class="small">%</sup></div>
+                    </div>
+                </div>
+                <div class="row text-center mt-4">
+                    <div class="h4 font-weight-bold mb-0">28L</div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+@section Scripts {
+    <script>
+      $(function() {
+
+      $(".progress").each(function() {
+
+        var value = $(this).attr('data-value');
+        var left = $(this).find('.progress-left .progress-bar');
+        var right = $(this).find('.progress-right .progress-bar');
+
+        if (value > 0) {
+          if (value <= 50) {
+            right.css('transform', 'rotate(' + percentageToDegrees(value) + 'deg)')
+          } else {
+            right.css('transform', 'rotate(180deg)')
+            left.css('transform', 'rotate(' + percentageToDegrees(value - 50) + 'deg)')
+          }
+        }
+
+      })
+
+      function percentageToDegrees(percentage) {
+
+        return percentage / 100 * 360
+
+      }
+
+    });
+    </script>
+}
