@@ -31,9 +31,17 @@
                 </div>
             </div>
             <div class="d-flex justify-content-end position-absolute" style="bottom: 10px; right: 10px;">
-                <a href="@Url.Action("Agendamento","Hemocentro",new {Id = iten.Id})">
-                    <button class="btn btn1 text-white" style="background-color: #C5141A;">Agendar Doação</button>
-                </a>
+                @if(User.Identity.IsAuthenticated)
+                {
+                    <a href="@Url.Action("Agendamento","Hemocentro",new {Id = iten.Id})">
+                        <button class="btn btn1 text-white" style="background-color: #C5141A;">Agendar Doação</button>
+                    </a>
+                }
+                else{
+                    <a asp-area="Identity" asp-page="/Account/Login">
+                        <button class="btn btn1 text-white" style="background-color: #C5141A;">Logar para Agendar a doação</button>
+                    </a>
+                }            
                 <a href="@Url.Action("BancoSangue","Hemocentro",new {Id = iten.Id})" style="margin-left: 20px">
                     <button class="btn btn2 text-white" style="background-color: #979797;">Ver Estoque de Sangue</button>
                 </a>

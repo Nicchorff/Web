@@ -1,6 +1,5 @@
-﻿@using DoacaoSangueMVC.Entities;
-@model Hemocentro
-
+﻿@using DoacaoSangueMVC.Models;
+@model AgendamentoDTO
 @{
     ViewBag.Title = "'NOME DO HEMOCENTRO' - Agendamento";
 }
@@ -275,14 +274,14 @@ blockquote {
                         </ul>
                     </div>
 
-                    <form role="form">
+                    <form role="form" asp-controller="Hemocentro" asp-action="Agendar">
                         <div class="tab-content">
                             <div class="tab-pane active" role="tabpanel" id="step1">
                                 <div class="bs-calltoaction bs-calltoaction-primary">
                                     <div class="row">
                                         <div class="col-md-9 cta-contents">
                                             <h1 class="cta-title">1 Etapa - Selecione a data</h1>
-                                            <select id="horario" style="color: black; padding: 10px;
+                                            <select  asp-for="hora" id="horario" style="color: black; padding: 10px;
                                                 font-size: 16px;
                                                 border-radius: 5px;
                                                 width: 200px;" onchange="mostrarHorario()">
@@ -299,15 +298,11 @@ blockquote {
                                                 <option value="19:00">19:00</option>
                                                 <option value="20:00">20:00</option>
                                             </select>
-                                            <p id="resultado"></p>
                                             <div class="container" style="margin-left: 20%;">
                                                 <div id="calendar-container">
                                                     <div id="calendar" style="width: 35%;
                                                     background-color:white;
                                                     margin: 0 auto;">
-                                                    </div>
-                                                    <div id="selected-date" style="margin-top: 20px; margin-left: 40%;">
-                                                        Data do agendamento: <span id="date-value">Nenhuma</span>
                                                     </div>
                                                 </div>
                                             </div>
@@ -325,18 +320,8 @@ blockquote {
                                 <div class="bs-calltoaction bs-calltoaction-success">
                                     <div class="row">
                                         <div class="col-md-9 cta-contents">
-                                            <h1 class="cta-title">Confirmar dados</h1>
                                             <div class="cta-desc">
-                                                <h2>Data:</h2>
-                                                <p id="resultado"></p>
-                                                <div id="selected-date" style="margin-top: 20px; margin-left: 40%;">
-                                                    Data do agendamento: <span id="date-value">Nenhuma</span>
-                                                </div>
-                                                <h2>Dados do hemocentro:</h2>
-                                                <p>COLOCAR DATA SELECIONADA</p>
-                                                <h2>Dados da doação:</h2>
-
-                                                <h2>recomendações:</h2>
+                                                <h2>Recomendações:</h2>
                                                 <p>
                                                     Não vá doar sangue em jejum. <br />
                                                     Faça um repouso mínimo de 6 horas na noite anterior à doação. <br />
@@ -352,7 +337,7 @@ blockquote {
                                     </div>
                                 </div>
                                 <ul class="list-inline pull-right">
-                                    <li><button type="button" class="btn btn-primary btn-info-full next-step">Confirmar</button></li>
+                                    <li><button type="submit" class="btn btn-primary btn-info-full next-step">Confirmar</button></li>
                                 </ul>
                             </div>
                             <div class="clearfix"></div>
