@@ -1,73 +1,46 @@
-﻿using DoacaoSangueMVC.Entities;
+﻿using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.AspNetCore.Mvc.Rendering;
+using Microsoft.EntityFrameworkCore;
+using DoacaoSangueMVC.Data;
+using DoacaoSangueMVC.Entities;
 
 namespace DoacaoSangueMVC.Controllers
 {
-
     public class HemocentroController : Controller
     {
-        Hemocentro hemocentro1 = new Hemocentro
+        private readonly ApplicationDbContext _context;
+
+        public HemocentroController(ApplicationDbContext context)
         {
-            Id = 1,
-            Nome = "Hemocentro Central",
-            CEP = 12345.678,
-            Referencia = "Near Central Park",
-            NomeHemocentro = "Central Blood Bank",
-            Telefone = 1234567890,
-            Email = "central@hemocentro.com",
-            Endereco = "123 Central St, Central City"
-        };
-
-        // Create second object
-        Hemocentro hemocentro2 = new Hemocentro
-        {
-            Id = 2,
-            Nome = "Hemocentro Norte",
-            CEP = 98765.432,
-            Referencia = "Next to North Hospital",
-            NomeHemocentro = "North Blood Bank",
-            Telefone = 0987654321,
-            Email = "north@hemocentro.com",
-            Endereco = "456 North Ave, Northern City"
-        };
-
-        public IActionResult Index()
-        {
-            List<Hemocentro> model = new List<Hemocentro>();   
-            model.Add(hemocentro1);
-            model.Add(hemocentro2);
-
-
-            return View(model);
+            _context = context;
         }
 
-        public IActionResult BancoSangue(int id)
+        // GET: Hemocentroe
+        public async Task<IActionResult> Index()
         {
-            List<Hemocentro> model = new List<Hemocentro>();
-            model.Add(hemocentro1);
-            model.Add(hemocentro2);
-            foreach(var iten in model)
+            return View(await _context.Hemocentros.ToListAsync());
+        }
+
+        // GET: Hemocentroe/Details/5
+        public async Task<IActionResult> Details(int? id)
+        {
+            if (id == null)
             {
-                if (iten.Id == id)
-                {
-                    return View();
-                }
+                return NotFound();
             }
-            return RedirectToAction("Index");
-        }
-        public IActionResult Agendamento(int id)
-        {
-            List<Hemocentro> model = new List<Hemocentro>();
-            model.Add(hemocentro1);
-            model.Add(hemocentro2);
-            foreach (var iten in model)
+
+            var hemocentro = await _context.Hemocentros
+                .FirstOrDefaultAsync(m => m.Id == id);
+            if (hemocentro == null)
             {
-                if (iten.Id == id)
-                {
-                    return View();
-                }
+                return NotFound();
             }
-            return RedirectToAction("Index");
+
+            return View(hemocentro);
         }
-    }
+    }  
 }
