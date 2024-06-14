@@ -27,8 +27,7 @@ namespace DoacaoSangueMVC.Controllers
             return View(await _context.Hemocentros.ToListAsync());
         }
 
-        // GET: Hemocentroe/Details/5
-        public async Task<IActionResult> Details(int? id)
+        public async Task<IActionResult> BancoSangue(int? id)
         {
             if (id == null)
             {
