@@ -17,7 +17,6 @@ namespace DoacaoSangueMVC.Data
         public DbSet<Hemocentro> Hemocentros { get; set; }
         public DbSet<Doador> Doadores { get; set; }
         public DbSet<DadosMedico> DadosMedicos { get; set; }
-        public DbSet<BancoDeSangue> BancoDeSangues { get; set; }
         protected override void OnModelCreating(ModelBuilder builder)
         {
             base.OnModelCreating(builder);

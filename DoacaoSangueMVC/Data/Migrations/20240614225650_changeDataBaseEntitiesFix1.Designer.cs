@@ -4,6 +4,7 @@ using DoacaoSangueMVC.Data;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 #nullable disable
@@ -11,9 +12,11 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace DoacaoSangueMVC.Data.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    partial class ApplicationDbContextModelSnapshot : ModelSnapshot
+    [Migration("20240614225650_changeDataBaseEntitiesFix1")]
+    partial class changeDataBaseEntitiesFix1
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        /// <inheritdoc />
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -40,6 +43,32 @@ namespace DoacaoSangueMVC.Data.Migrations
                     b.HasKey("ID");
 
                     b.ToTable("ABO");
+                });
+
+            modelBuilder.Entity("DoacaoSangueMVC.Entities.BancoDeSangue", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int");
+
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
+
+                    b.Property<DateTime>("Data")
+                        .HasColumnType("datetime2");
+
+                    b.Property<int>("IdDoacao")
+                        .HasColumnType("int");
+
+                    b.Property<int>("IdHemocentro")
+                        .HasColumnType("int");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("IdDoacao");
+
+                    b.HasIndex("IdHemocentro");
+
+                    b.ToTable("BancoDeSangues");
                 });
 
             modelBuilder.Entity("DoacaoSangueMVC.Entities.DadosMedico", b =>
@@ -353,19 +382,19 @@ namespace DoacaoSangueMVC.Data.Migrations
                     b.HasData(
                         new
                         {
-                            Id = "95b2082b-cbd3-479d-ad8a-8deecf184058",
+                            Id = "afd1873c-2a28-4787-9ca9-09387fb0a4f0",
                             Name = "admin",
                             NormalizedName = "admin"
                         },
                         new
                         {
-                            Id = "07842e47-f947-4210-95a2-df8c9fe7129a",
+                            Id = "eeeb1fa4-ad5e-47b3-8919-a75250f3e18f",
                             Name = "usuario",
                             NormalizedName = "usuario"
                         },
                         new
                         {
-                            Id = "1a81a3a2-c280-4496-bcc0-cf41022157c9",
+                            Id = "bda43fae-57b2-4568-9236-e8012f2da3b1",
                             Name = "hemocentro",
                             NormalizedName = "hemocentro"
                         });
@@ -479,6 +508,25 @@ namespace DoacaoSangueMVC.Data.Migrations
                     b.HasKey("UserId", "LoginProvider", "Name");
 
                     b.ToTable("AspNetUserTokens", (string)null);
+                });
+
+            modelBuilder.Entity("DoacaoSangueMVC.Entities.BancoDeSangue", b =>
+                {
+                    b.HasOne("DoacaoSangueMVC.Entities.Doador", "Doador")
+                        .WithMany()
+                        .HasForeignKey("IdDoacao")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.HasOne("DoacaoSangueMVC.Entities.Hemocentro", "Hemocentro")
+                        .WithMany()
+                        .HasForeignKey("IdHemocentro")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.Navigation("Doador");
+
+                    b.Navigation("Hemocentro");
                 });
 
             modelBuilder.Entity("DoacaoSangueMVC.Entities.Doador", b =>
