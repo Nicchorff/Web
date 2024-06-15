@@ -11,6 +11,12 @@ namespace DoacaoSangueMVC.WorkService.Hemocentro
         {
             _context = context;
         }
+        
+        public ICollection<BancoDeSangueDTO> MapeamentoParaBancoDeSangueDTOs()
+        {
+
+            return null;
+        }
 
 
 

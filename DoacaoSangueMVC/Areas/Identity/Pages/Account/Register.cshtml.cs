@@ -19,11 +19,14 @@ using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
 using Microsoft.AspNetCore.WebUtilities;
 using Microsoft.Extensions.Logging;
+using Microsoft.EntityFrameworkCore;
+using DoacaoSangueMVC.Data;
 
 namespace DoacaoSangueMVC.Areas.Identity.Pages.Account
 {
     public class RegisterModel : PageModel
     {
+        private readonly ApplicationDbContext _context;
         private readonly SignInManager<User> _signInManager;
         private readonly UserManager<User> _userManager;
         private readonly IUserStore<User> _userStore;
@@ -36,7 +39,8 @@ namespace DoacaoSangueMVC.Areas.Identity.Pages.Account
             IUserStore<User> userStore,
             SignInManager<User> signInManager,
             ILogger<RegisterModel> logger,
-            IEmailSender emailSender)
+            IEmailSender emailSender,
+            ApplicationDbContext context)
         {
             _userManager = userManager;
             _userStore = userStore;
@@ -44,6 +48,7 @@ namespace DoacaoSangueMVC.Areas.Identity.Pages.Account
             _signInManager = signInManager;
             _logger = logger;
             _emailSender = emailSender;
+            _context = context;
         }
 
         /// <summary>
@@ -69,6 +74,8 @@ namespace DoacaoSangueMVC.Areas.Identity.Pages.Account
         ///     This API supports the ASP.NET Core Identity default UI infrastructure and is not intended to be used
         ///     directly from your code. This API may change or be removed in future releases.
         /// </summary>
+        /// 
+        public IList<ABO> aBOs { get; set; }
         public class InputModel
         {
             /// <summary>
@@ -127,13 +134,7 @@ namespace DoacaoSangueMVC.Areas.Identity.Pages.Account
             public double CEP { get; set; }
 
             [Display(Name = "Tipo Sanguíneo")]
-            public required string ABO { get; set; }
-
-            [Display(Name = "Fator RH")]
-            public bool IsPositivo { get; set; }
-
-            [Display(Name = "Fator RH")]
-            public bool IsNegativo { get; set; }
+            public required int IdTipoSanguineo{ get; set; }
 
             [Display(Name = "Sexo")]
             public required string Sexo { get; set; }
@@ -154,6 +155,7 @@ namespace DoacaoSangueMVC.Areas.Identity.Pages.Account
 
         public async Task OnGetAsync(string returnUrl = null)
         {
+            aBOs = await _context.TiposSanguineos.ToListAsync();
             ReturnUrl = returnUrl;
             ExternalLogins = (await _signInManager.GetExternalAuthenticationSchemesAsync()).ToList();
         }
@@ -178,9 +180,7 @@ namespace DoacaoSangueMVC.Areas.Identity.Pages.Account
                     NomeDoPai = Input.NomeDoPai,
                     Emprego = Input.Emprego,
                     CEP = Input.CEP,
-                    ABO = Input.ABO,
-                    IsPositivo = Input.IsPositivo,
-                    IsNegativo = Input.IsNegativo,
+                    IdTipoSanguineo = Input.IdTipoSanguineo,
                     Sexo = Input.Sexo,
                     Endereco = Input.Endereco
                 };
