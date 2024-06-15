@@ -1,6 +1,72 @@
 html {
-  font-size: 14px;
+    font-size: 14px;
+    position: relative;
+    min-height: 100%;
+    font-family: "DM Sans", sans-serif;
 }
+
+// <uniquifier > : Use a unique and descriptive class name
+// <weight > : Use a value from 100 to 1000
+
+.dm-sans-<uniquifier > {
+    font-family: "DM Sans", sans-serif;
+    font-optical-sizing: auto;
+    font-weight: 500;
+    font-style: normal;
+}
+
+header {
+    font-family: "DM Sans", sans-serif;
+    font-optical-sizing: auto;
+    font-weight: 600;
+    font-style: normal;
+    
+}
+
+
+body {
+    font-family: "DM Sans", sans-serif;
+    font-optical-sizing: auto;
+}
+
+/* Set height of carousel */
+.carousel-inner {
+    height: 600px; /* Define the desired fixed height */
+}
+
+/* Ensure images cover the fixed height */
+.carousel-item img {
+    height: 100%;
+    width: auto;
+    object-fit: cover; /* Adjust image to cover the defined height */
+}
+
+@media (max-width: 768px) {
+    .carousel-inner {
+        height: 250px; /* Adjust height for smaller screens */
+    }
+}
+
+@media (max-width: 1199px) {
+    .carousel-inner {
+        height: 400px; /* Adjust height for smaller screens */
+    }
+}
+
+@media (max-width: 414px) {
+    .carousel-inner {
+        height: 250px; /* Adjust height for smaller screens */
+    }
+}
+
+.bg-red {
+    background-color: #ff0000 !important;
+}
+
+.text-white {
+    color: #ffffff !important;
+}
+
 
 @media (min-width: 768px) {
   html {
@@ -12,11 +78,7 @@ html {
   box-shadow: 0 0 0 0.1rem white, 0 0 0 0.25rem #258cfb;
 }
 
-html {
-  position: relative;
-  min-height: 100%;
-}
-
 body {
   margin-bottom: 60px;
 }
+
