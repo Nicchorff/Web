@@ -9,35 +9,70 @@
     <div class="row">
         @foreach(var item in Model)
         {
-            <div class="col-xl-3 col-lg-6 mb-4">
-                <div class="bg-white rounded-lg p-5 shadow">
-                    <h2 class="h6 font-weight-bold text-center mb-4">Informações do Tipo Sanguíneo @item.TipoSanguineo.TipoSanguineo @(item.TipoSanguineo.IsPositivo ? "+" : "-")</h2>
+            @if (Math.Round(item.MediaDeSangueNoEstoque) < item.QuantidadeMinímaSugerida)
+            {
+                <div class="col-xl-3 col-lg-6 mb-4">
+                    <div class="bg-danger rounded-lg p-5 shadow">
+                        <h2 class="h6 font-weight-bold text-center mb-4"><strong>Informações do Tipo Sanguíneo @item.TipoSanguineo.TipoSanguineo @(item.TipoSanguineo.IsPositivo ? "+" : "-")</strong></h2>
 
-                    <!-- Progress bar 1 -->
-                    <div class="progress mx-auto" data-value='@Math.Round(item.MediaDeSangueNoEstoque)'>
-                        <span class="progress-left">
-                            <span class="progress-bar border-primary"></span>
-                        </span>
-                        <span class="progress-right">
-                            <span class="progress-bar border-primary"></span>
-                        </span>
-                        <div class="progress-value w-100 h-100 rounded-circle d-flex align-items-center justify-content-center">
-                            <div class="h2 font-weight-bold">@item.MediaDeSangueNoEstoque<sup class="small">%</sup></div>
+                        <!-- Progress bar 1 -->
+                        <div class="progress mx-auto" data-value='@Math.Round(item.MediaDeSangueNoEstoque)'>
+                            <span class="progress-left">
+                                <span class="progress-bar border-primary"></span>
+                            </span>
+                            <span class="progress-right">
+                                <span class="progress-bar border-primary"></span>
+                            </span>
+                            <div class="progress-value w-100 h-100 rounded-circle d-flex align-items-center justify-content-center">
+                                <div class="h2 font-weight-bold">@item.MediaDeSangueNoEstoque<sup class="small">%</sup></div>
+                            </div>
                         </div>
+                        <!-- END -->
+                        <!-- Demo info -->
+                        <div class="row text-center mt-4">
+                            <div class="col-6 border-right">
+                                <div class="h4 font-weight-bold mb-0"><strong>@item.QuantidadeNoEstoque L</strong></div><span class="small text-gray"><strong>Quantidade no Estoque</strong></span>
+                            </div>
+                            <div class="col-6">
+                                <div class="h4 font-weight-bold mb-0"><strong>@item.QuantidadeMinímaSugerida L</strong></div><span class="small text-gray"><strong>Quantidade Mínima</strong></span>
+                            </div>
+                        </div>
+                        <!-- END -->
                     </div>
-                    <!-- END -->
-                    <!-- Demo info -->
-                    <div class="row text-center mt-4">
-                        <div class="col-6 border-right">
-                            <div class="h4 font-weight-bold mb-0">@item.QuantidadeNoEstoque L</div><span class="small text-gray">Quantidade no Estoque</span>
+                </div> 
+            }
+            else
+            {
+                <div class="col-xl-3 col-lg-6 mb-4">
+                    <div class="bg-white rounded-lg p-5 shadow">
+                        <h2 class="h6 font-weight-bold text-center mb-4">Informações do Tipo Sanguíneo @item.TipoSanguineo.TipoSanguineo @(item.TipoSanguineo.IsPositivo ? "+" : "-")</h2>
+
+                        <!-- Progress bar 1 -->
+                        <div class="progress mx-auto" data-value='@Math.Round(item.MediaDeSangueNoEstoque)'>
+                            <span class="progress-left">
+                                <span class="progress-bar border-primary"></span>
+                            </span>
+                            <span class="progress-right">
+                                <span class="progress-bar border-primary"></span>
+                            </span>
+                            <div class="progress-value w-100 h-100 rounded-circle d-flex align-items-center justify-content-center">
+                                <div class="h2 font-weight-bold">@item.MediaDeSangueNoEstoque<sup class="small">%</sup></div>
+                            </div>
                         </div>
-                        <div class="col-6">
-                            <div class="h4 font-weight-bold mb-0">@item.QuantidadeMinímaSugerida L</div><span class="small text-gray">Quantidade Mínima</span>
+                        <!-- END -->
+                        <!-- Demo info -->
+                        <div class="row text-center mt-4">
+                            <div class="col-6 border-right">
+                                <div class="h4 font-weight-bold mb-0">@item.QuantidadeNoEstoque L</div><span class="small text-gray">Quantidade no Estoque</span>
+                            </div>
+                            <div class="col-6">
+                                <div class="h4 font-weight-bold mb-0">@item.QuantidadeMinímaSugerida L</div><span class="small text-gray">Quantidade Mínima</span>
+                            </div>
                         </div>
+                        <!-- END -->
                     </div>
-                    <!-- END -->
                 </div>
-            </div>
+            }
         }
     </div>
 </div>

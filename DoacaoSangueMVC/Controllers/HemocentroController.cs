@@ -10,6 +10,7 @@ using DoacaoSangueMVC.Entities;
 using DoacaoSangueMVC.Models;
 using System.Text;
 using DoacaoSangueMVC.WorkService.Hemocentro;
+using Microsoft.AspNetCore.Mvc.Routing;
 
 namespace DoacaoSangueMVC.Controllers
 {
@@ -27,7 +28,8 @@ namespace DoacaoSangueMVC.Controllers
         // GET: Hemocentroe
         public async Task<IActionResult> Index()
         {
-            return View(await _context.Hemocentros.ToListAsync());
+            var viewModel = _workService.MapeamentoParaHemocentroDTOS();
+            return View(await viewModel);
         }
 
         public async Task<IActionResult> BancoSangue(int? id)

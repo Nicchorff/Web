@@ -35,6 +35,35 @@ namespace DoacaoSangueMVC.WorkService.Hemocentro
             return bancoDeSangueDTOs;
         }
 
+        public async Task<ICollection<HemocentroDTO>> MapeamentoParaHemocentroDTOS()
+        {
+            var listaTipossanguineos = await ListaDeTiposSanguineosAsync();
+            var listaComHemocentros = await _context.Hemocentros.ToListAsync();
+            var hemocentroDTOs = new List<HemocentroDTO>();
+            var bancoDeSangueDTO = new BancoDeSangueDTO();
+
+            foreach (var iten in listaComHemocentros)
+            {
+                var hemocentroDTO = new HemocentroDTO();
+                IList<string> listaComOsTipoSanguineoFaltando = new List<string>();
+                hemocentroDTO.Hemocentro = iten;
+                foreach (var item in listaTipossanguineos)
+                {
+                    var listaComTodoVolumeColetado = await BuscarTipoSanguineosDeDoadoresNoHemocentro(item.ID, iten.Id);
+                    var valorComTodosOsVolumesSomados = CalcularTotalDeSangue(listaComTodoVolumeColetado);
+                    var mediaColetados = TirarMediaDoTotalDeSangue(valorComTodosOsVolumesSomados);
+                    if (mediaColetados < bancoDeSangueDTO.QuantidadeMinímaSugerida)
+                    {
+                        listaComOsTipoSanguineoFaltando.Add($"{item.TipoSanguineo} {(item.IsPositivo ? "+" : "-")}");
+                    }
+                }
+                hemocentroDTO.TipoSanguineoFaltando = listaComOsTipoSanguineoFaltando;
+                hemocentroDTOs.Add(hemocentroDTO);
+            }
+
+            return hemocentroDTOs;
+        }
+
         private async Task<IList<int>> BuscarTipoSanguineosDeDoadoresNoHemocentro(int idtipoSanguineo, int idDoHemocentro)
         {
             return await _context.Doadores.Where(x => x.IdTipoSanguineo ==  idtipoSanguineo)
