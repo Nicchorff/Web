@@ -1,5 +1,6 @@
 using DoacaoSangueMVC.Data;
 using DoacaoSangueMVC.Entities;
+using DoacaoSangueMVC.WorkService.Hemocentro;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
 
@@ -14,6 +15,7 @@ builder.Services.AddDatabaseDeveloperPageExceptionFilter();
 builder.Services.AddDefaultIdentity<User>(options => options.SignIn.RequireConfirmedAccount = false)
     .AddEntityFrameworkStores<ApplicationDbContext>();
 builder.Services.AddControllersWithViews();
+builder.Services.AddTransient<HemocentroWorkService>();
 
 var app = builder.Build();
 

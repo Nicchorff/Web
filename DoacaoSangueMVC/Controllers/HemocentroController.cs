@@ -9,16 +9,19 @@ using DoacaoSangueMVC.Data;
 using DoacaoSangueMVC.Entities;
 using DoacaoSangueMVC.Models;
 using System.Text;
+using DoacaoSangueMVC.WorkService.Hemocentro;
 
 namespace DoacaoSangueMVC.Controllers
 {
     public class HemocentroController : Controller
     {
         private readonly ApplicationDbContext _context;
+        private readonly HemocentroWorkService _workService;
 
-        public HemocentroController(ApplicationDbContext context)
+        public HemocentroController(ApplicationDbContext context, HemocentroWorkService workService)
         {
             _context = context;
+            _workService = workService;
         }
 
         // GET: Hemocentroe
@@ -40,12 +43,12 @@ namespace DoacaoSangueMVC.Controllers
             {
                 return NotFound();
             }
+            
+            var bancoDeSangueDTOs = await _workService.MapeamentoParaBancoDeSangueDTOs(hemocentro);
 
-
-
-            return View(hemocentro);
+            return View(bancoDeSangueDTOs);
         }// GET: Hemocentroe/Details/5
-        public async Task<IActionResult> Agendamento()
+        public IActionResult Agendamento()
         {
             return View();
         }

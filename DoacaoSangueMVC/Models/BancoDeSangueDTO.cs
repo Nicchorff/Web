@@ -6,7 +6,8 @@ namespace DoacaoSangueMVC.Models
     {
         public ABO TipoSanguineo { get; set; }
         public string NomeHemocentro { get; set; }
-        public double Quantidade { get; set; }
-        public double MediaDoSangue { get; set; }
+        public double QuantidadeNoEstoque { get; set; }
+        public double MediaDeSangueNoEstoque { get; set; }
+        public double QuantidadeMinímaSugerida { get; set; } = 50;
     }
 }
