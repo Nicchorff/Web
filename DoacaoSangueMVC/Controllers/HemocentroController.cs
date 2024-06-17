@@ -62,8 +62,8 @@ namespace DoacaoSangueMVC.Controllers
 
         public async Task<IActionResult> Agendar(AgendamentoDTO model)
         {
-            _workService.CriarAgendamentoDoacao(model.hora,model.data,model.AuthenticationTypeUser,model.IdHemocentro);
-            _workService.APIWeebHookMSGWPP();
+            var query = await _workService.CriarAgendamentoDoacao(model.hora, model.data, model.AuthenticationTypeUser, model.IdHemocentro);
+            _workService.APIWeebHookMSGWPP(model);
             return RedirectToAction("Index");
            
         }

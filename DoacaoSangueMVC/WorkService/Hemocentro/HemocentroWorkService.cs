@@ -1,4 +1,4 @@
-﻿//TODO - Buscar Quantidade total no estoque
+﻿
 
 using DoacaoSangueMVC.Data;
 using DoacaoSangueMVC.Entities;
@@ -111,32 +111,37 @@ namespace DoacaoSangueMVC.WorkService.Hemocentro
             return ml / 10;
         }
 
-        public async void APIWeebHookMSGWPP()
+        public async void APIWeebHookMSGWPP(AgendamentoDTO model)
         {
+            var tipoSanguineo = await BuscarTipoSanguineoDoUsuario(model.AuthenticationTypeUser);
             string url = "https://webhook.app.hubhero.com.br/webhook/48ec13d5-039b-4df0-9c9e-b20c40c76806";
 
             var data = new
             {
-                nome = "Érico",
-                idade = 20
+                nome = BuscarNomeUsuarioPorId(model.AuthenticationTypeUser),
+                nomeHemocentro = _context.Hemocentros.Where(x => x.Id == model.IdHemocentro).Select(s => s.NomeHemocentro).FirstOrDefault(),
+                dia = model.data,
+                hora = model.hora,
+                tipoSanguineo = tipoSanguineo.TipoSanguineo + (tipoSanguineo.IsPositivo ? "+" : "-"),
+                telefone = await BuscarTelefoneUsuarioPorId(model.AuthenticationTypeUser)
 
             };
 
             var json = Newtonsoft.Json.JsonConvert.SerializeObject(data);
             var content = new StringContent(json, Encoding.UTF8, "application/json");
 
-            // Criar uma instância de HttpClient
+            //Criar uma instância de HttpClient
             using (HttpClient client = new HttpClient())
             {
                 try
                 {
-                    // Enviar a requisição POST
+                    //Enviar a requisição POST
                     HttpResponseMessage response = await client.PostAsync(url, content);
 
-                    // Ler a resposta da requisição
+                    //Ler a resposta da requisição
                     string responseBody = await response.Content.ReadAsStringAsync();
 
-                    // Verificar se a requisição foi bem-sucedida
+                    //Verificar se a requisição foi bem-sucedida
                     if (response.IsSuccessStatusCode)
                     {
                         Console.WriteLine("Requisição POST enviada com sucesso!");
@@ -158,10 +163,10 @@ namespace DoacaoSangueMVC.WorkService.Hemocentro
             }
         }
 
-        public async void CriarAgendamentoDoacao(TimeOnly hora, DateOnly date, string identificadorDoUsuario, int idDohemocentro)
+        public async Task<bool> CriarAgendamentoDoacao(TimeOnly hora, DateOnly date, string identificadorDoUsuario, int idDohemocentro)
         {
             var doacao = new DoacoesAgendadas();
-            var tipoSanguineo = BuscarTipoSanguineoDoUsuario(identificadorDoUsuario);
+            var tipoSanguineo = await BuscarTipoSanguineoDoUsuario(identificadorDoUsuario);
 
             doacao.DataDoacao = new DateTime(date, hora);
             doacao.IdHemocentro = idDohemocentro;
@@ -170,9 +175,10 @@ namespace DoacaoSangueMVC.WorkService.Hemocentro
             doacao.TipoSanguineo = tipoSanguineo.TipoSanguineo + (tipoSanguineo.IsPositivo ? "+" : "-"); 
             _context.DoacoesAgendadas.Add(doacao);
             await _context.SaveChangesAsync();
+            return true;
         }
 
-        public ABO BuscarTipoSanguineoDoUsuario(string identificadorDoUsuario)
+        public async Task<ABO> BuscarTipoSanguineoDoUsuario(string identificadorDoUsuario)
         {
             var queryTipoSanguineo = _context.Users
                 .Where(x => x.Id == identificadorDoUsuario)
@@ -199,6 +205,21 @@ namespace DoacaoSangueMVC.WorkService.Hemocentro
                 listaInformacaoAgendamentoDTOs.Add(informacaoAngedamentoDTO);
             }
             return listaInformacaoAgendamentoDTOs;
+        }
+
+        public string BuscarNomeUsuarioPorId(string identificador)
+        {
+            var queryTipoSanguineo = _context.Users
+                .Where(x => x.Id == identificador)
+                .Select(x => x.UserName).FirstOrDefault();
+            return queryTipoSanguineo;
+        }
+        public async Task<string> BuscarTelefoneUsuarioPorId(string identificador)
+        {
+            var queryTipoSanguineo = _context.Users
+                .Where(x => x.Id == identificador)
+                .Select(x => x.PhoneNumber).FirstOrDefault();
+            return queryTipoSanguineo;
         }
     }
 }
