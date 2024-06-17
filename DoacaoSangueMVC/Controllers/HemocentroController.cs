@@ -50,13 +50,19 @@ namespace DoacaoSangueMVC.Controllers
 
             return View(bancoDeSangueDTOs);
         }// GET: Hemocentroe/Details/5
-        public IActionResult Agendamento()
+        public async Task<IActionResult> Agendamento(int id)
         {
-            return View();
+            AgendamentoDTO agendamentoDTO = new AgendamentoDTO();
+            var query = await _context.Hemocentros.Where(m => m.Id == id).FirstOrDefaultAsync();
+            agendamentoDTO.NomeHemocentro = query.Nome;
+            agendamentoDTO.IdHemocentro = query.Id;
+            agendamentoDTO.data = new System.DateOnly(DateTime.Now.Year, DateTime.Now.Month, DateTime.Now.Day);
+            return View(agendamentoDTO);
         }
 
         public async Task<IActionResult> Agendar(AgendamentoDTO model)
         {
+            _workService.CriarAgendamentoDoacao(model.hora,model.data,model.AuthenticationTypeUser,model.IdHemocentro);
             _workService.APIWeebHookMSGWPP();
             return RedirectToAction("Index");
            

@@ -157,5 +157,30 @@ namespace DoacaoSangueMVC.WorkService.Hemocentro
             }
         }
 
+        public async void CriarAgendamentoDoacao(TimeOnly hora, DateOnly date, string identificadorDoUsuario, int idDohemocentro)
+        {
+            var doacao = new DoacoesAgendadas();
+            var tipoSanguineo = BuscarTipoSanguineoDoUsuario(identificadorDoUsuario);
+
+            doacao.DataDoacao = new DateTime(date, hora);
+            doacao.IdHemocentro = idDohemocentro;
+            doacao.IdUsuario = identificadorDoUsuario;
+            doacao.Status = false;
+            doacao.TipoSanguineo = tipoSanguineo.TipoSanguineo + (tipoSanguineo.IsPositivo ? "+" : "-"); 
+            _context.DoacoesAgendadas.Add(doacao);
+            await _context.SaveChangesAsync();
+        }
+
+        public ABO BuscarTipoSanguineoDoUsuario(string identificadorDoUsuario)
+        {
+            var queryTipoSanguineo = _context.Users
+                .Where(x => x.Id == identificadorDoUsuario)
+                .Select(x => x.IdTipoSanguineo).FirstOrDefault();
+            var tipoSanguineo = _context.TiposSanguineos
+                .Where(x => x.ID == queryTipoSanguineo).FirstOrDefault();
+                
+            return tipoSanguineo;
+        }
+
     }
 }

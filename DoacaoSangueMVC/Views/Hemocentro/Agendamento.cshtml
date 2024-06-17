@@ -244,10 +244,11 @@ blockquote {
 }
 
 </style>
-<header>
-    <link rel='stylesheet' href='https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css'>
-</header>
+
 <main class="cd__main" style="margin-bottom: -40%;">
+    <section class="text-center">
+        <h1>Agendar doação para o @Model.NomeHemocentro</h1>
+    </section>
     <!-- Start DEMO HTML (Use the following code into your project)-->
     <div class="container">
         <div class="row">
@@ -284,6 +285,7 @@ blockquote {
                                                 <option value="20:00">20:00</option>
                                             </select>
                                             <input type="hidden" asp-for="AuthenticationTypeUser" value="@User.Claims.First().Value" />
+                                            <input type="hidden" asp-for="IdHemocentro" value="@Model.IdHemocentro" />
                                             <div class="cta-desc">
                                                 <h2>Recomendações:</h2>
                                                 <p>

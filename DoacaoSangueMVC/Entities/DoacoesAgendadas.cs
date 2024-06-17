@@ -12,7 +12,7 @@ namespace DoacaoSangueMVC.Entities
         [ForeignKey("Hemocentro")]
         public int IdHemocentro{ get; set; }
         [ForeignKey("AspNetUsers")]
-        public int IdUsuario { get; set; }
+        public string IdUsuario { get; set; }
         public bool Status { get; set; }
     }
 
