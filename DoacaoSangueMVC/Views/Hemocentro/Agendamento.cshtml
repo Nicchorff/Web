@@ -1,4 +1,5 @@
 ﻿@using DoacaoSangueMVC.Models;
+@using Microsoft.AspNetCore.Identity
 @model AgendamentoDTO
 @{
     ViewBag.Title = "'NOME DO HEMOCENTRO' - Agendamento";
@@ -280,8 +281,8 @@ blockquote {
                                 <div class="bs-calltoaction bs-calltoaction-primary">
                                     <div class="row">
                                         <div class="col-md-9 cta-contents">
-                                            <h1 class="cta-title">1 Etapa - Selecione a data</h1>
-                                            <select  asp-for="hora" id="horario" style="color: black; padding: 10px;
+                                            @* <h1 class="cta-title">Selecione a data</h1> *@
+                                            @* <select  asp-for="hora" id="horario" style="color: black; padding: 10px;
                                                 font-size: 16px;
                                                 border-radius: 5px;
                                                 width: 200px;" onchange="mostrarHorario()">
@@ -298,7 +299,46 @@ blockquote {
                                                 <option value="19:00">19:00</option>
                                                 <option value="20:00">20:00</option>
                                             </select>
-                                            <div class="container" style="margin-left: 20%;">
+ *@
+                                                <h1 class="cta-title">Selecione a data</h1>
+                                                <input type="date" asp-for="data" id="data" style="color: black; padding: 10px;
+                                                    font-size: 16px;
+                                                    border-radius: 5px;
+                                                    width: 200px;" onchange="mostrarData()" />
+
+                                                @* <div class="container" style="margin-left: 20%;">
+                                                    <div id="calendar-container">
+                                                        <div id="calendar" style="width: 35%;
+                                                            background-color:white;
+                                                            margin: 0 auto;">
+                                                        </div>
+                                                    </div>
+                                                </div> *@
+                                                <h1 class="cta-title">Selecione o Horário</h1>
+                                                <select asp-for="hora" id="horario" style="color: black; padding: 10px;
+                                                font-size: 16px;
+                                                border-radius: 5px;
+                                                width: 200px;" onchange="mostrarHorario()">
+                                                    <option value="09:00">09:00</option>
+                                                    <option value="10:00">10:00</option>
+                                                    <option value="11:00">11:00</option>
+                                                    <option value="12:00">12:00</option>
+                                                    <option value="13:00">13:00</option>
+                                                    <option value="14:00">14:00</option>
+                                                    <option value="15:00">15:00</option>
+                                                    <option value="16:00">16:00</option>
+                                                    <option value="17:00">17:00</option>
+                                                    <option value="18:00">18:00</option>
+                                                    <option value="19:00">19:00</option>
+                                                    <option value="20:00">20:00</option>
+                                                </select>
+                                            <input type="hidden" asp-for="AuthenticationTypeUser" value="@User.Claims.First().Value" />
+@*                                             <div class="container" style="margin-left: 20%;">
+                                            <div class="col-md-9 cta-contents">
+                                                <!-- Seu código existente aqui -->
+
+                                                <input type="hidden" asp-for="AuthenticationTypeUser" value="@User.Identity.GetUserId()" />
+                                            </div>
                                                 <div id="calendar-container">
                                                     <div id="calendar" style="width: 35%;
                                                     background-color:white;
@@ -306,7 +346,7 @@ blockquote {
                                                     </div>
                                                 </div>
                                             </div>
-
+ *@                                         
                                         </div>
                                     </div>
                                 </div>
@@ -375,6 +415,9 @@ blockquote {
         document.getElementById("resultado").innerHTML = "Horário selecionado: " + horarioSelecionado;
     }
 
-
-
+    function mostrarData() {
+        var input = document.getElementById("data");
+        var dataSelecionada = input.value;
+        document.getElementById("resultado").innerHTML = "Data selecionada: " + dataSelecionada;
+    }
 </script>

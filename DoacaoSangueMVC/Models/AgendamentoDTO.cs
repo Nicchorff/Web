@@ -3,7 +3,7 @@
     public class AgendamentoDTO
     {
         public TimeOnly hora { get; set; }
-        public int data { get; set; }
-        public int idDoador { get; set; }
+        public DateOnly data { get; set; }
+        public string AuthenticationTypeUser { get; set; }
     }
 }
