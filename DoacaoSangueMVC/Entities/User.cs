@@ -1,4 +1,5 @@
 ﻿using Microsoft.AspNetCore.Identity;
+using System.ComponentModel.DataAnnotations.Schema;
 
 namespace DoacaoSangueMVC.Entities
 {
@@ -13,9 +14,8 @@ namespace DoacaoSangueMVC.Entities
         public required string NomeDoPai { get; set; }
         public required string Emprego { get; set; }
         public double CEP { get; set; }
-        public required string ABO { get; set; }
-        public bool IsPositivo { get; set; }
-        public bool IsNegativo { get; set; }
+        [ForeignKey("ABO")]
+        public required int IdTipoSanguineo { get; set; }
         public required string Sexo { get; set; }
         public required string Endereco { get; set; }
     }

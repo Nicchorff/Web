@@ -4,6 +4,7 @@ using DoacaoSangueMVC.Data;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 #nullable disable
@@ -11,9 +12,11 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace DoacaoSangueMVC.Data.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    partial class ApplicationDbContextModelSnapshot : ModelSnapshot
+    [Migration("20240614225650_changeDataBaseEntitiesFix1")]
+    partial class changeDataBaseEntitiesFix1
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        /// <inheritdoc />
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -39,7 +42,33 @@ namespace DoacaoSangueMVC.Data.Migrations
 
                     b.HasKey("ID");
 
-                    b.ToTable("TiposSanguineos");
+                    b.ToTable("ABO");
+                });
+
+            modelBuilder.Entity("DoacaoSangueMVC.Entities.BancoDeSangue", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int");
+
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
+
+                    b.Property<DateTime>("Data")
+                        .HasColumnType("datetime2");
+
+                    b.Property<int>("IdDoacao")
+                        .HasColumnType("int");
+
+                    b.Property<int>("IdHemocentro")
+                        .HasColumnType("int");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("IdDoacao");
+
+                    b.HasIndex("IdHemocentro");
+
+                    b.ToTable("BancoDeSangues");
                 });
 
             modelBuilder.Entity("DoacaoSangueMVC.Entities.DadosMedico", b =>
@@ -70,7 +99,7 @@ namespace DoacaoSangueMVC.Data.Migrations
 
                     SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
 
-                    b.Property<int>("IdTipoSanguineo")
+                    b.Property<int>("ABOID")
                         .HasColumnType("int");
 
                     b.Property<int>("IdUsuario")
@@ -83,6 +112,8 @@ namespace DoacaoSangueMVC.Data.Migrations
                         .HasColumnType("int");
 
                     b.HasKey("Id");
+
+                    b.HasIndex("ABOID");
 
                     b.HasIndex("UsuarioId");
 
@@ -211,6 +242,10 @@ namespace DoacaoSangueMVC.Data.Migrations
                     b.Property<string>("Id")
                         .HasColumnType("nvarchar(450)");
 
+                    b.Property<string>("ABO")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
                     b.Property<int>("AccessFailedCount")
                         .HasColumnType("int");
 
@@ -239,8 +274,11 @@ namespace DoacaoSangueMVC.Data.Migrations
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
-                    b.Property<int>("IdTipoSanguineo")
-                        .HasColumnType("int");
+                    b.Property<bool>("IsNegativo")
+                        .HasColumnType("bit");
+
+                    b.Property<bool>("IsPositivo")
+                        .HasColumnType("bit");
 
                     b.Property<bool>("LockoutEnabled")
                         .HasColumnType("bit");
@@ -344,19 +382,19 @@ namespace DoacaoSangueMVC.Data.Migrations
                     b.HasData(
                         new
                         {
-                            Id = "34fbf4aa-bce9-4394-a707-35d4bd7f985c",
+                            Id = "afd1873c-2a28-4787-9ca9-09387fb0a4f0",
                             Name = "admin",
                             NormalizedName = "admin"
                         },
                         new
                         {
-                            Id = "de15f0dd-ae5f-4c9f-87db-dcc476b917dd",
+                            Id = "eeeb1fa4-ad5e-47b3-8919-a75250f3e18f",
                             Name = "usuario",
                             NormalizedName = "usuario"
                         },
                         new
                         {
-                            Id = "fe8e6acb-6feb-41e3-9c70-7873837bf10b",
+                            Id = "bda43fae-57b2-4568-9236-e8012f2da3b1",
                             Name = "hemocentro",
                             NormalizedName = "hemocentro"
                         });
@@ -472,11 +510,38 @@ namespace DoacaoSangueMVC.Data.Migrations
                     b.ToTable("AspNetUserTokens", (string)null);
                 });
 
+            modelBuilder.Entity("DoacaoSangueMVC.Entities.BancoDeSangue", b =>
+                {
+                    b.HasOne("DoacaoSangueMVC.Entities.Doador", "Doador")
+                        .WithMany()
+                        .HasForeignKey("IdDoacao")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.HasOne("DoacaoSangueMVC.Entities.Hemocentro", "Hemocentro")
+                        .WithMany()
+                        .HasForeignKey("IdHemocentro")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.Navigation("Doador");
+
+                    b.Navigation("Hemocentro");
+                });
+
             modelBuilder.Entity("DoacaoSangueMVC.Entities.Doador", b =>
                 {
+                    b.HasOne("DoacaoSangueMVC.Entities.ABO", "ABO")
+                        .WithMany()
+                        .HasForeignKey("ABOID")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
                     b.HasOne("DoacaoSangueMVC.Entities.User", "Usuario")
                         .WithMany()
                         .HasForeignKey("UsuarioId");
+
+                    b.Navigation("ABO");
 
                     b.Navigation("Usuario");
                 });

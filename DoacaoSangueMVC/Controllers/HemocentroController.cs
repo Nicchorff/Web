@@ -41,6 +41,8 @@ namespace DoacaoSangueMVC.Controllers
                 return NotFound();
             }
 
+
+
             return View(hemocentro);
         }// GET: Hemocentroe/Details/5
         public async Task<IActionResult> Agendamento()

@@ -4,6 +4,7 @@ using DoacaoSangueMVC.Data;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 #nullable disable
@@ -11,9 +12,11 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace DoacaoSangueMVC.Data.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    partial class ApplicationDbContextModelSnapshot : ModelSnapshot
+    [Migration("20240615184812_finishDb")]
+    partial class finishDb
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        /// <inheritdoc />
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -70,7 +73,7 @@ namespace DoacaoSangueMVC.Data.Migrations
 
                     SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
 
-                    b.Property<int>("IdTipoSanguineo")
+                    b.Property<int>("ABOID")
                         .HasColumnType("int");
 
                     b.Property<int>("IdUsuario")
@@ -83,6 +86,8 @@ namespace DoacaoSangueMVC.Data.Migrations
                         .HasColumnType("int");
 
                     b.HasKey("Id");
+
+                    b.HasIndex("ABOID");
 
                     b.HasIndex("UsuarioId");
 
@@ -344,19 +349,19 @@ namespace DoacaoSangueMVC.Data.Migrations
                     b.HasData(
                         new
                         {
-                            Id = "34fbf4aa-bce9-4394-a707-35d4bd7f985c",
+                            Id = "4c6b2fc0-25e0-4b74-a711-73c518de0153",
                             Name = "admin",
                             NormalizedName = "admin"
                         },
                         new
                         {
-                            Id = "de15f0dd-ae5f-4c9f-87db-dcc476b917dd",
+                            Id = "fdb39344-901c-483c-973e-fa1ff09e56d2",
                             Name = "usuario",
                             NormalizedName = "usuario"
                         },
                         new
                         {
-                            Id = "fe8e6acb-6feb-41e3-9c70-7873837bf10b",
+                            Id = "2100f861-3ed9-41fe-8446-68ff3fa739e0",
                             Name = "hemocentro",
                             NormalizedName = "hemocentro"
                         });
@@ -474,9 +479,17 @@ namespace DoacaoSangueMVC.Data.Migrations
 
             modelBuilder.Entity("DoacaoSangueMVC.Entities.Doador", b =>
                 {
+                    b.HasOne("DoacaoSangueMVC.Entities.ABO", "ABO")
+                        .WithMany()
+                        .HasForeignKey("ABOID")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
                     b.HasOne("DoacaoSangueMVC.Entities.User", "Usuario")
                         .WithMany()
                         .HasForeignKey("UsuarioId");
+
+                    b.Navigation("ABO");
 
                     b.Navigation("Usuario");
                 });

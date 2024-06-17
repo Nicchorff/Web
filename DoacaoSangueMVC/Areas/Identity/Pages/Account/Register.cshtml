@@ -1,4 +1,6 @@
-﻿@page
+﻿@* TODO - Terminar de fazer o registro puxando os tipos sanguineos do banco *@
+
+@page
 @model RegisterModel
 @{
     ViewData["Title"] = "Register";
@@ -77,6 +79,7 @@
                 <label asp-for="Input.NomeDoPai">Nome do Pai</label>
                 <span asp-validation-for="Input.NomeDoPai" class="text-danger"></span>
             </div>
+
             <div class="form-floating mb-3">
                 <input asp-for="Input.Emprego" class="form-control" autocomplete="off" aria-required="true" placeholder="Emprego" />
                 <label asp-for="Input.Emprego">Emprego</label>
@@ -88,17 +91,14 @@
                 <span asp-validation-for="Input.CEP" class="text-danger"></span>
             </div>
             <div class="form-floating mb-3">
-                <input asp-for="Input.ABO" class="form-control" autocomplete="off" aria-required="true" placeholder="ABO" />
-                <label asp-for="Input.ABO">ABO</label>
-                <span asp-validation-for="Input.ABO" class="text-danger"></span>
-            </div>
-            <div class="form-check mb-3">
-                <input asp-for="Input.IsPositivo" class="form-check-input" />
-                <label class="form-check-label" asp-for="Input.IsPositivo">Is Positivo</label>
-            </div>
-            <div class="form-check mb-3">
-                <input asp-for="Input.IsNegativo" class="form-check-input" />
-                <label class="form-check-label" asp-for="Input.IsNegativo">Is Negativo</label>
+                <select asp-for="Input.IdTipoSanguineo" class="form-control" autocomplete="off" aria-required="true">
+                @foreach(var iten in Model.aBOs)
+                {
+                    <option value="@iten.ID">@iten.TipoSanguineo @(iten.IsPositivo ? "+" : "-")</option>
+                }
+                </select>
+                <label asp-for="Input.IdTipoSanguineo">Escolha seu Tipo Sanguíneo</label>
+                <span asp-validation-for="Input.IdTipoSanguineo" class="text-danger"></span>
             </div>
             <div class="form-floating mb-3">
                 <input asp-for="Input.Sexo" class="form-control" autocomplete="off" aria-required="true" placeholder="Sexo" />
