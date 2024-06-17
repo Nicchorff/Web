@@ -253,39 +253,23 @@ blockquote {
         <div class="row">
             <section>
                 <div class="wizard">
-                    <div class="wizard-inner">
-                        <!--<div class="connecting-line"></div>-->
-                        <ul class="nav nav-tabs" role="tablist">
-
-                            <li role="presentation" class="active">
-                                <a href="#step1" data-toggle="tab" aria-controls="step1" role="tab" title="1 etapa">
-                                    <span class="round-tab">
-                                        <i class="glyphicon glyphicon-folder-open"></i>
-                                    </span>
-                                </a>
-                            </li>
-
-                            <li role="presentation" class="disabled">
-                                <a href="#complete" data-toggle="tab" aria-controls="complete" role="tab" title="Confirmar">
-                                    <span class="round-tab">
-                                        <i class="glyphicon glyphicon-ok"></i>
-                                    </span>
-                                </a>
-                            </li>
-                        </ul>
-                    </div>
-
                     <form role="form" asp-controller="Hemocentro" asp-action="Agendar">
                         <div class="tab-content">
                             <div class="tab-pane active" role="tabpanel" id="step1">
                                 <div class="bs-calltoaction bs-calltoaction-primary">
                                     <div class="row">
                                         <div class="col-md-9 cta-contents">
-                                            @* <h1 class="cta-title">Selecione a data</h1> *@
-                                            @* <select  asp-for="hora" id="horario" style="color: black; padding: 10px;
+                                            <h1 class="cta-title">Selecione a data</h1>
+                                            <input type="date" asp-for="data" id="data" style="color: black; padding: 10px;
                                                 font-size: 16px;
                                                 border-radius: 5px;
-                                                width: 200px;" onchange="mostrarHorario()">
+                                                width: 200px;" onchange="mostrarData()" />
+
+                                            <h1 class="cta-title">Selecione o Horário</h1>
+                                            <select asp-for="hora" id="horario" style="color: black; padding: 10px;
+                                            font-size: 16px;
+                                            border-radius: 5px;
+                                            width: 200px;" onchange="mostrarHorario()">
                                                 <option value="09:00">09:00</option>
                                                 <option value="10:00">10:00</option>
                                                 <option value="11:00">11:00</option>
@@ -299,67 +283,7 @@ blockquote {
                                                 <option value="19:00">19:00</option>
                                                 <option value="20:00">20:00</option>
                                             </select>
- *@
-                                                <h1 class="cta-title">Selecione a data</h1>
-                                                <input type="date" asp-for="data" id="data" style="color: black; padding: 10px;
-                                                    font-size: 16px;
-                                                    border-radius: 5px;
-                                                    width: 200px;" onchange="mostrarData()" />
-
-                                                @* <div class="container" style="margin-left: 20%;">
-                                                    <div id="calendar-container">
-                                                        <div id="calendar" style="width: 35%;
-                                                            background-color:white;
-                                                            margin: 0 auto;">
-                                                        </div>
-                                                    </div>
-                                                </div> *@
-                                                <h1 class="cta-title">Selecione o Horário</h1>
-                                                <select asp-for="hora" id="horario" style="color: black; padding: 10px;
-                                                font-size: 16px;
-                                                border-radius: 5px;
-                                                width: 200px;" onchange="mostrarHorario()">
-                                                    <option value="09:00">09:00</option>
-                                                    <option value="10:00">10:00</option>
-                                                    <option value="11:00">11:00</option>
-                                                    <option value="12:00">12:00</option>
-                                                    <option value="13:00">13:00</option>
-                                                    <option value="14:00">14:00</option>
-                                                    <option value="15:00">15:00</option>
-                                                    <option value="16:00">16:00</option>
-                                                    <option value="17:00">17:00</option>
-                                                    <option value="18:00">18:00</option>
-                                                    <option value="19:00">19:00</option>
-                                                    <option value="20:00">20:00</option>
-                                                </select>
                                             <input type="hidden" asp-for="AuthenticationTypeUser" value="@User.Claims.First().Value" />
-@*                                             <div class="container" style="margin-left: 20%;">
-                                            <div class="col-md-9 cta-contents">
-                                                <!-- Seu código existente aqui -->
-
-                                                <input type="hidden" asp-for="AuthenticationTypeUser" value="@User.Identity.GetUserId()" />
-                                            </div>
-                                                <div id="calendar-container">
-                                                    <div id="calendar" style="width: 35%;
-                                                    background-color:white;
-                                                    margin: 0 auto;">
-                                                    </div>
-                                                </div>
-                                            </div>
- *@                                         
-                                        </div>
-                                    </div>
-                                </div>
-                                <ul class="list-inline pull-right">
-                                    <li><button type="button" onclick="" class="btn btn-primary next-step">Próximo</button></li>
-                                </ul>
-                            </div>
-                            
-                            <div class="tab-pane" role="tabpanel" id="complete">
-                                <h3>Complete</h3>
-                                <div class="bs-calltoaction bs-calltoaction-success">
-                                    <div class="row">
-                                        <div class="col-md-9 cta-contents">
                                             <div class="cta-desc">
                                                 <h2>Recomendações:</h2>
                                                 <p>

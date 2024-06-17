@@ -18,6 +18,7 @@ namespace DoacaoSangueMVC.Data
         public DbSet<Doador> Doadores { get; set; }
         public DbSet<DadosMedico> DadosMedicos { get; set; }
         public DbSet<ABO> TiposSanguineos {  get; set; }
+        public DbSet<DoacoesAgendadas> DoacoesAgendadas { get; set; }
         protected override void OnModelCreating(ModelBuilder builder)
         {
             base.OnModelCreating(builder);
