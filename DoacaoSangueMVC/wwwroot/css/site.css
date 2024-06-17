@@ -23,10 +23,11 @@ header {
     
 }
 
-
-body {
-    font-family: "DM Sans", sans-serif;
-    font-optical-sizing: auto;
+body-landing-page {
+    font-family: "DM Sans", sans-serif !important;
+    font-optical-sizing: auto !important;
+    font-weight: 500 !important;
+    font-style: normal !important;
 }
 
 /* Set height of carousel */
@@ -43,7 +44,7 @@ body {
 
 @media (max-width: 768px) {
     .carousel-inner {
-        height: 250px; /* Adjust height for smaller screens */
+        height: 200px; /* Adjust height for smaller screens */
     }
 }
 
@@ -79,6 +80,14 @@ body {
 }
 
 body {
-  margin-bottom: 60px;
+    margin-bottom: 60px;
+    font-family: "DM Sans", sans-serif !important;
+    font-optical-sizing: auto !important;
+    font-weight: 500 !important;
+    font-style: normal !important;
+}
+
+text-center {
+    font-weight: 700;
 }
 
