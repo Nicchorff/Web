@@ -47,9 +47,9 @@ namespace DoacaoSangueMVC.Controllers
             }
             
             var bancoDeSangueDTOs = await _workService.MapeamentoParaBancoDeSangueDTOs(hemocentro);
-
+            ViewBag.NomeHemocentro = hemocentro.Nome;
             return View(bancoDeSangueDTOs);
-        }// GET: Hemocentroe/Details/5
+        }
         public async Task<IActionResult> Agendamento(int id)
         {
             AgendamentoDTO agendamentoDTO = new AgendamentoDTO();

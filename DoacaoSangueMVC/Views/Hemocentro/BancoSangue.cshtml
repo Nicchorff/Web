@@ -6,6 +6,13 @@
 }
 
 <div class="container py-5">
+    <div class="text-center">
+        <h1 class="display-4">Estoque de Sangue do @ViewBag.NomeHemocentro</h1>
+        <section style ="padding-bottom: 12px;">
+            <div class="lead mb-0" >Aqui você pode ver o estoque de sangue do hemocentro</div>
+            <strong >Se quiser voltar para visualizar os hemocentros clique aqui em </strong><button onclick="history.back()" class="btn btn-primary btn-warning">Voltar</button>
+        </section>
+    </div>
     <div class="row">
         @foreach(var item in Model)
         {
