@@ -4,6 +4,7 @@ using DoacaoSangueMVC.Data;
 using DoacaoSangueMVC.Entities;
 using DoacaoSangueMVC.Models;
 using Microsoft.EntityFrameworkCore;
+using System.Reflection.Metadata;
 using System.Text;
 
 namespace DoacaoSangueMVC.WorkService.Hemocentro
@@ -182,5 +183,22 @@ namespace DoacaoSangueMVC.WorkService.Hemocentro
             return tipoSanguineo;
         }
 
+        public async Task<IList<InformacaoAngedamentoDTO>> MapeamentoInformacaoAngedamentoDTO(string identificacaoUsuario)
+        {
+            List<InformacaoAngedamentoDTO> listaInformacaoAgendamentoDTOs = new List<InformacaoAngedamentoDTO>();
+            var doacoesAgendadas = await _context.DoacoesAgendadas
+                .Where(x => x.IdUsuario == identificacaoUsuario)
+                .ToListAsync();
+            foreach (var item in doacoesAgendadas)
+            {
+                InformacaoAngedamentoDTO informacaoAngedamentoDTO = new InformacaoAngedamentoDTO();
+                informacaoAngedamentoDTO.Data = item.DataDoacao;
+                informacaoAngedamentoDTO.TipoSanguineo = item.TipoSanguineo;
+                informacaoAngedamentoDTO.NomeHemocentro = _context.Hemocentros.Where(x => x.Id == item.IdHemocentro).Select(s => s.NomeHemocentro).FirstOrDefault();
+                informacaoAngedamentoDTO.Status = item.Status;
+                listaInformacaoAgendamentoDTOs.Add(informacaoAngedamentoDTO);
+            }
+            return listaInformacaoAgendamentoDTOs;
+        }
     }
 }

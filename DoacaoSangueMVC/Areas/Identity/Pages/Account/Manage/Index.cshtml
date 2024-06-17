@@ -1,0 +1,123 @@
+﻿@page
+@model IndexModel
+@{
+    ViewData["Title"] = "Profile";
+    ViewData["ActivePage"] = ManageNavPages.Index;
+}
+
+<h3>@ViewData["Title"]</h3>
+<partial name="_StatusMessage" for="StatusMessage" />
+<div class="row">
+    <div class="col-md-6">
+        <form id="profile-form" method="post">
+            <div asp-validation-summary="ModelOnly" class="text-danger" role="alert"></div>
+            <div class="form-floating mb-3">
+                <input asp-for="Username" class="form-control" placeholder="Please choose your username." disabled />
+                <label asp-for="Username" class="form-label"></label>
+            </div>
+            <div class="form-floating mb-3">
+                <input asp-for="Input.PhoneNumber" class="form-control" placeholder="Please enter your phone number."/>
+                <label asp-for="Input.PhoneNumber" class="form-label"></label>
+                <span asp-validation-for="Input.PhoneNumber" class="text-danger"></span>
+            </div>
+            <div class="container">
+                @foreach(var item in Model.DoacoesAgendadas)
+                {
+                    <div class="card mt-5 border-5 pt-2 active pb-0 px-3">
+                        <div class="card-body ">
+                            <div class="row">
+                                <div class="col-12 ">
+                                    <h4 class="card-title "><b>Doeacões Agendadas no @item.NomeHemocentro</b></h4>
+                                </div>
+                                <div class="col">
+                                    <h6 class="card-subtitle mb-2 text-muted">
+                                        <p class="card-text text-muted small ">
+                                            Marcado para <span class="font-weight-bold"> @item.Data</span> , Seu Tipo Sanguíneo é @item.TipoSanguineo
+                                        </p>
+                                    </h6>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="card-footer bg-white px-0 ">
+                            <div class="row">
+                                <div class=" col-md-auto ">
+                                    <p>Status do Agendamento: @(item.Status ? "Confirmado" : "Pendente")</p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                }
+            </div>
+
+            <button id="update-profile-button" type="submit" class="w-100 btn btn-lg btn-primary">Save</button>
+        </form>
+    </div>
+</div>
+
+@section Scripts {
+    <partial name="_ValidationScriptsPartial" />
+}
+
+<style>
+    
+    #star {
+        margin-left: -5px !important;
+        vertical-align: bottom !important;
+        opacity: 0.5;
+    }
+
+
+    .more {
+        opacity: 0.5 !important;
+    }
+
+    .btn:hover {
+        color: black !important;
+    }
+
+    .vl {
+        margin: 8px !important;
+        width: 2px;
+        border-right: 1px solid #aaaaaa;
+        height: 25px;
+    }
+
+
+    #plus {
+        opacity: 0.8;
+    }
+
+
+    .card {
+        border-radius: 10px !important;
+    }
+
+    a:hover {
+        background-color: #ccc !important;
+    }
+
+
+
+    .btn-outlined:active {
+        color: #FFF;
+        border-color: #fff !important;
+    }
+
+
+    img {
+        cursor: pointer;
+        overflow: visible;
+    }
+
+    .btn:focus,
+    .btn:active {
+        outline: none !important;
+        box-shadow: none !important;
+    }
+
+    .container {
+        margin-top: 100px !important;
+        margin-bottom: 100px !important;
+    }
+
+</style>
